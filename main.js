@@ -105,13 +105,14 @@ function showMessage(elementId, message, type) {
         }, 2000);
     }
 }
-const apiKey = process.env.SENDINBLUE_API_KEY; 
+
 // Обработчик для формы в футере
 async function handleFooterFormSubmit(event) {
     event.preventDefault();
     const email = document.getElementById('footer-email').value;
 
     const apiUrl = 'https://api.brevo.com/v3/contacts';
+    const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
@@ -139,6 +140,7 @@ async function handlePopupFormSubmit(event) {
     const email = document.getElementById('popup-email').value;
 
     const apiUrl = 'https://api.brevo.com/v3/contacts';
+    const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
@@ -151,6 +153,8 @@ async function handlePopupFormSubmit(event) {
         if (response.ok) {
             showMessage('popup-response-message', 'You have successfully subscribed', 'success');
             document.getElementById('popup-email').value = ''; // Очистить поле
+            formContainer.style.display = 'none';
+            overlay.style.display = 'none';
         } else {
             const errorData = await response.json();
             showMessage('popup-response-message', `Error: ${errorData.message}`, 'error');
@@ -174,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Проверяем ширину экрана
     const isMobile = () => window.innerWidth <= 640;
-
     // Функция для фиксации хедера
     const handleScroll = () => {
         if (isMobile() && window.scrollY > 0) {
@@ -269,13 +272,20 @@ window.addEventListener('DOMContentLoaded', () => {
             '.choose-item-bottom-content',
             '.choose-item-bottom p',
             '.choose-item-bottom span',
+            '.choose-bottom-wrapp',
+            '.choose-item-top img',
+            '.choose-item-bottom',
             '.hero-block > .hero-title-block > span',
+            '.choose-item-bottom:nth-child(2)',
             '.choose-item-bottom:nth-child(2) > .choose-item-bottom-content',
+            '.slider-img',
+            '.slider-content',
             '.slider-content p',
             '.slider-content span',
             '.slider-content button',
             '.swiper-bottom-button-prev',
             '.swiper-bottom-button-next',
+            '.slider-wrapper-bottom',
             '.swiper-bottom-pagination .swiper-pagination-bullet',
             '.footer-wrapp',
             '.footer-top-row p',
@@ -283,6 +293,9 @@ window.addEventListener('DOMContentLoaded', () => {
             '.footer-bottom-content-item ul li a',
             '.footer-bootom-privacy-policy p',
             '.privacy-policy-link a',
+            '.form-container',
+            '.form-container h2',
+            '.signup-form input[type=email]',
         ];
 
         // Применение класса `black` ко всем элементам
@@ -290,10 +303,19 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll(selector).forEach(el => el.classList.add('black'));
         });
 
-        // Смена логотипа
+        // // Смена логотипа
         const footerLogo = document.querySelector('.footer-logo img');
         if (footerLogo) {
             footerLogo.src = 'img/logo-footer-dark.png';
+        }
+        //  // Смена логотипа
+        //  const HeaderLogo = document.querySelector('header img');
+        //  if (HeaderLogo) {
+        //       HeaderLogo.src = 'img/logo-header-dark.svg';
+        //  }
+         const clouse_form_black = document.querySelector("#sib-form > button > img");
+         if (clouse_form_black) {
+             clouse_form_black.src = 'img/coluse-form-black.png';
         }
     }
 
@@ -331,13 +353,20 @@ window.addEventListener('DOMContentLoaded', () => {
             '.choose-item-bottom-content',
             '.choose-item-bottom p',
             '.choose-item-bottom span',
+            '.choose-bottom-wrapp',
+            '.choose-item-top img',
+            '.choose-item-bottom',
             '.hero-block > .hero-title-block > span',
+            '.choose-item-bottom:nth-child(2)',
             '.choose-item-bottom:nth-child(2) > .choose-item-bottom-content',
+            '.slider-content',
+            '.slider-img',
             '.slider-content p',
             '.slider-content span',
             '.slider-content button',
             '.swiper-bottom-button-prev',
             '.swiper-bottom-button-next',
+            '.slider-wrapper-bottom',
             '.swiper-bottom-pagination .swiper-pagination-bullet',
             '.footer-wrapp',
             '.footer-top-row p',
@@ -345,6 +374,9 @@ window.addEventListener('DOMContentLoaded', () => {
             '.footer-bottom-content-item ul li a',
             '.footer-bootom-privacy-policy p',
             '.privacy-policy-link a',
+            '.form-container',
+            '.form-container h2',
+            '.signup-form input[type=email]',
         ];
 
         // Удаление класса `black` со всех элементов
@@ -352,11 +384,20 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll(selector).forEach(el => el.classList.remove('black'));
         });
 
-        // Смена логотипа
+        // // Смена логотипа
         const footerLogo = document.querySelector('.footer-logo img');
         if (footerLogo) {
             footerLogo.src = 'img/logo-footer.png';
         }
+        //  // Смена логотипа
+        //  const HeaderLogo = document.querySelector('header img');
+        //  if (HeaderLogo) {
+        //       HeaderLogo.src = 'img/logo-header.svg';
+        //  }
+        const clouse_form_black = document.querySelector("#sib-form > button > img");
+        if (clouse_form_black) {
+            clouse_form_black.src = 'img/coluse-form.png';
+       }
     }
 });
 
