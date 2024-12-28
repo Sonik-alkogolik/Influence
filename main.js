@@ -105,14 +105,14 @@ function showMessage(elementId, message, type) {
         }, 2000);
     }
 }
-
+const apiKey = process.env.SENDINBLUE_API_KEY; 
 // Обработчик для формы в футере
 async function handleFooterFormSubmit(event) {
     event.preventDefault();
     const email = document.getElementById('footer-email').value;
 
     const apiUrl = 'https://api.brevo.com/v3/contacts';
-    const apiKey = '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';
+    // const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
@@ -140,7 +140,7 @@ async function handlePopupFormSubmit(event) {
     const email = document.getElementById('popup-email').value;
 
     const apiUrl = 'https://api.brevo.com/v3/contacts';
-    const apiKey = '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';
+    // const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
