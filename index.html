@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .preloader-wrapp {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #EF8072 0%, #F7CEA4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .preloader-wrapp.hidden {
+            transform: translateY(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader-wrapp img {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        body.loaded .content {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .preloader-wrapp img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Onest:wght@400;700&display=swap"
+        rel="stylesheet">
+    <title>Influence</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+
+</head>
+
+<body>
+
+    <div class="preloader-wrapp">
+        <img src="img/preload-img.svg" alt="Preloader Icon">
+    </div>
+    <main>
+        <div class="container">
+            <div class="header">
+                <header>
+                    <img class="logo" src="img/logo-header.png" alt="logo">
+                    <ul>
+                        <li>
+                            <a href="#" data-target=".platform-wrapp">How it work</a>
+                        </li>
+                        <li>
+                            <a href="#" data-target=".slider-wrapper-bottom">Advantages</a>
+                        </li>
+                        <li>
+                            <a href="#" data-target=".choose-wrapp">Product</a>
+                        </li>
+                    </ul>
+                    <div class="buttom-header-row">
+                        <button id="toggle-theme" class="toggle-button">
+                            <svg class="light-theme-icon" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 18.5C15.3137 18.5 18 15.8137 18 12.5C18 9.18629 15.3137 6.5 12 6.5C8.68629 6.5 6 9.18629 6 12.5C6 15.8137 8.68629 18.5 12 18.5Z" stroke="#F3A489" stroke-width="1.5"/>
+                            <path d="M12 2.5V3.5" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M12 21.5V22.5" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M22 12.5H21" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M3 12.5H2" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M19.071 5.42969L18.6782 5.82252" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M5.32155 19.1777L4.92871 19.5706" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M19.071 19.5703L18.6782 19.1775" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M5.32155 5.82228L4.92871 5.42944" stroke="#F3A489" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+
+                            <svg class="dark-theme-icon" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.9001 2.80719C19.7392 2.3976 19.1616 2.3976 19.0007 2.80719L18.5703 3.90247C18.5212 4.02752 18.4226 4.12651 18.298 4.17583L17.2067 4.6078C16.7986 4.76934 16.7986 5.349 17.2067 5.51054L18.298 5.94252C18.4226 5.99184 18.5212 6.09082 18.5703 6.21587L19.0007 7.31115C19.1616 7.72074 19.7392 7.72074 19.9001 7.31116L20.3305 6.21587C20.3796 6.09082 20.4782 5.99184 20.6028 5.94252L21.6941 5.51054C22.1022 5.349 22.1022 4.76934 21.6941 4.6078L20.6028 4.17583C20.4782 4.12651 20.3796 4.02752 20.3305 3.90247L19.9001 2.80719Z" stroke="#AFA6EE"/>
+                                <path d="M16.0328 8.62969C15.8718 8.22011 15.2943 8.22011 15.1333 8.62969L14.9764 9.02904C14.9273 9.15409 14.8287 9.25307 14.7041 9.30239L14.3062 9.45989C13.8981 9.62143 13.8981 10.2011 14.3062 10.3626L14.7041 10.5201C14.8287 10.5694 14.9273 10.6684 14.9764 10.7935L15.1333 11.1928C15.2943 11.6024 15.8718 11.6024 16.0328 11.1928L16.1897 10.7935C16.2388 10.6684 16.3374 10.5694 16.462 10.5201L16.8599 10.3626C17.268 10.2011 17.268 9.62143 16.8599 9.45989L16.462 9.30239C16.3374 9.25307 16.2388 9.15409 16.1897 9.02904L16.0328 8.62969Z" stroke="#AFA6EE"/>
+                                <path d="M21.25 12.5C21.25 17.6086 17.1086 21.75 12 21.75V23.25C17.9371 23.25 22.75 18.4371 22.75 12.5H21.25ZM12 21.75C6.89137 21.75 2.75 17.6086 2.75 12.5H1.25C1.25 18.4371 6.06294 23.25 12 23.25V21.75ZM2.75 12.5C2.75 7.39137 6.89137 3.25 12 3.25V1.75C6.06294 1.75 1.25 6.56294 1.25 12.5H2.75ZM15.5 14.75C12.3244 14.75 9.75 12.1756 9.75 9H8.25C8.25 13.0041 11.4959 16.25 15.5 16.25V14.75ZM20.4253 11.969C19.4172 13.6373 17.5882 14.75 15.5 14.75V16.25C18.1349 16.25 20.4407 14.8439 21.7092 12.7447L20.4253 11.969ZM9.75 9C9.75 6.91182 10.8627 5.0828 12.531 4.07467L11.7553 2.79085C9.65609 4.0593 8.25 6.36509 8.25 9H9.75ZM12 3.25C11.9115 3.25 11.8077 3.21008 11.7324 3.13168C11.6686 3.06527 11.6538 3.00244 11.6503 2.97703C11.6461 2.94587 11.6482 2.85557 11.7553 2.79085L12.531 4.07467C13.0342 3.77065 13.196 3.21398 13.1368 2.77627C13.0754 2.32126 12.7166 1.75 12 1.75V3.25ZM21.7092 12.7447C21.6444 12.8518 21.5541 12.8539 21.523 12.8497C21.4976 12.8462 21.4347 12.8314 21.3683 12.7676C21.2899 12.6923 21.25 12.5885 21.25 12.5H22.75C22.75 11.7834 22.1787 11.4246 21.7237 11.3632C21.286 11.304 20.7293 11.4658 20.4253 11.969L21.7092 12.7447Z" fill="#AFA6EE"/>
+                                </svg>
+                                
+                         </button>
+                        <button class="get-access-btn">Get early access</button>
+                    </div>
+                    <button class="burger"></button>
+                    <div class="menu-mob">
+                        <ul>
+                            <li>
+                                <a href="#" data-target=".platform-wrapp">How it work</a>
+                            </li>
+                            <li>
+                                <a href="#" data-target=".slider-wrapper-bottom">Advantages</a>
+                            </li>
+                            <li>
+                                <a href="#" data-target=".choose-wrapp">Product</a>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+            </div>
+            <div class="hero-block">
+                <div class="hero-title-block">
+                    <h1>Connecting <br>
+                        <p class="text-with-image">
+                            music
+                            <img class="spiral-mob" src="img/spiral.png" alt="">
+                            <span class="text-with-desktop"> and influence</span>
+                        </p>
+                        <p class="text-with-mob"> and influence</p>
+                    </h1>
+                    <p>Find the perfect partner to promote your tracks.</p>
+                    <span>A new platform where producers and Influencers<br> find each other through an intuitive
+                        Tinder-like interface.<br> Start promoting your music today </span>
+                    <button class="get-access-btn">Get early access</button>
+                </div>
+            </div>
+            <div class="wi-fit-wrapp">
+                <div class="wi-fit-title">
+                    <h2>Who do we fit?</h2>
+                </div>
+                <div class="wi-fit-row">
+                    <div class="we-fit-wor-item">
+                        <img src="img/we_fit_1.png" alt="we_fit_img">
+                        <a href="">Producers</a>
+                        <p>Get access to a database of Influencers to promote your music on TikTok, YouTube, Instagram
+                            and other platforms.</p>
+                    </div>
+                    <div class="we-fit-wor-item">
+                        <img src="img/we_fit_2.png" alt="we_fit_img">
+                        <a href="">Influencers</a>
+                        <p>Earn money by placing music in your content. Monetize your audience by adding value to your
+                            subscribers..</p>
+                    </div>
+                </div>
+            </div>
+            <div class="platform-wrapp">
+                <div class="platform-title">
+                    <h2>How does the platform work?</h2>
+                </div>
+                <div class="platform-row">
+                    <div class="platform-row-item">
+                        <span>01</span>
+                        <img src="img/platform_work_1.png" alt="platform_work_img">
+                        <div class="platform-row-item-text">
+                            <h3>Producer signs up</h3>
+                            <p>Selects an Influencer through a Tinder-style interface with filters by social network,
+                                topic, and
+                                cost.</p>
+                        </div>
+                    </div>
+                    <div class="platform-row-item">
+                        <span>02</span>
+                        <img src="img/platform_work_2.png" alt="platform_work_img">
+                        <div class="platform-row-item-text">
+                            <h3>Influencer creates content</h3>
+                            <p>“creatc” - creative work with the track.</p>
+                        </div>
+                    </div>
+                    <div class="platform-row-item">
+                        <span>03</span>
+                        <img src="img/platform_work_3.png" alt="platform_work_img">
+                        <div class="platform-row-item-text">
+                            <h3>Analytics</h3>
+                            <p>The system tracks campaign performance through statistics integration</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform-bottom-block">
+                    <div class="platform-bottom-block-content">
+                        <p>Start promoting your music today!</p>
+                        <button class="get-access-btn">Get early access</button>
+                    </div>
+                </div>
+            </div>
+            <div class="choose-wrapp">
+                <div class="choose-title">
+                    <h2>Why choose us?</h2>
+                </div>
+                <div class="choose-wrapper-column">
+                    <div class="choose-item-top desktop">
+                        <img src="img/choose_bg.png" alt="">
+                        <div class="choose-item-content">
+                            <p>Analytics</p>
+                            <span>Influencer subscriber data </span>
+                            <div class="choose-item-content-link">
+                                <a href="">Age</a>
+                                <a href="">Location</a>
+                                <a href="">Activity</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose-item-top mob">
+                        <img src="img/choose_bg-mob.png" alt="">
+                        <div class="choose-item-content">
+                            <p>Analytics</p>
+                            <span>Influencer subscriber data </span>
+                            <div class="choose-item-content-link">
+                                <a href="">Age</a>
+                                <a href="">Location</a>
+                                <a href="">Activity</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose-bottom-wrapp">
+                        <div class="choose-item-bottom">
+                            <div class="choose-item-bottom-content">
+                                <img src="img/choose_item_img_2.png" alt="">
+                                <p>Monetization</p>
+                                <span>Influencers make money and producers get quality promotion.</span>
+                            </div>
+                        </div>
+                        <div class="choose-item-bottom">
+                            <div class="choose-item-bottom-content">
+                                <p>Convenience</p>
+                                <span>Swipes and filters for quick partner selection </span>
+                                <img class="choose-item-img-desktop" src="img/choose_item_img_3.png" alt="">
+                                <img class="choose-item-img-mob" src="img/choose_item_img_3_mob.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-wrapper-bottom">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide first">
+                            <div class="swiper-slide-row">
+                                <div class="slider-content">
+                                    <p>Are you music producer?</p>
+                                    <span>Promote your tracks with the perfect influencers. <br> Reach millions through
+                                        targeted influencer campaigns.</span>
+                                    <button class="get-access-btn">Get early access</button>
+                                </div>
+                                <div class="slider-img">
+                                    <img class="slider-img-desktop" src="img/slider-img.png" alt="">
+                                    <img class="slider-img-mob" src="img/slider-img-mob.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide second">
+                            <div class="swiper-slide-row">
+                                <div class="slider-content">
+                                    <p>Or are you Influencers?</p>
+                                    <span>Monetize your influence with music campaigns.
+                                        Earn while creating content you love.</span>
+                                    <button class="get-access-btn">Get early access</button>
+                                </div>
+                                <div class="slider-img">
+                                    <img class="slider-img-desktop" src="img/slider-img1.png" alt="">
+                                    <img class="slider-img-mob" src="img/slider-img-mob2.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-bottom-button-next"></div>
+                <div class="swiper-bottom-button-prev"></div>
+                <div class="swiper-bottom-pagination"></div>
+            </div>
+        </div>
+        <div class="footer-wrapp">
+            <footer>
+                <div class="footer-top-row">
+                    <p>Join the future of music promotion! Get access first.</p>
+                    <div class="footer-form">
+                        <input 
+                            type="email" 
+                            id="footer-email" 
+                            name="email" 
+                            placeholder="Enter your email" 
+                            required 
+                            aria-label="Enter your email"
+                        >
+                        <button type="submit" form="footer-email-form">Get early access</button>
+                        <form id="footer-email-form" style="display: none;"></form>
+                        <div id="footer-response-message" style="display: none; margin-top: 10px; padding: 10px; border-radius: 5px; text-align: center;"></div>
+                    </div>
+                </div>
+                <div class="footer-bottom-row">
+                    <div class="footer-bottom-row-content">
+                        <div class="footer-bottom-content-item">
+                            <div class="footer-logo">
+                                <img src="img/logo-footer.png" alt="">
+                                <p>Product</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <a href="#" data-target=".platform-wrapp">How it work</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-target=".slider-wrapper-bottom">Advantages</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-target=".choose-wrapp">Product</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-bottom-content-item">
+                            <div class="social-icons">
+                                <a href="">
+                                    <img src="img/logo-tiktok.png" alt="">
+                                </a>
+                                <a href="">
+                                    <img src="img/insta.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bootom-privacy-policy">
+                        <p>©2024 All Rights Reserved</p>
+                        <div class="privacy-policy-link">
+                            <a href="">Privacy Policy</a>
+
+                            <a href="">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+    <div class="overlay"></div>
+    <button class="scroll-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 4l-8 8h6v8h4v-8h6z" />
+        </svg>
+    </button>
+
+    <div class="form-container" id="sib-form">
+        <button class="close-button"><img src="img/coluse-form.png" alt=""></button>
+        <h2>Join the future of music promotion!<br>Get access first.</h2>
+        <form id="brevo-email-form" class="signup-form">
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Get early access</button>
+        </form>
+        <div id="popup-response-message" style="display: none; margin-top: 10px; padding: 10px; border-radius: 5px; text-align: center;">You have successfully subscribed!</div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader-wrapp');
+            const MIN_DISPLAY_TIME = 1500;
+            const startTime = performance.now();
+            const hidePreloader = () => {
+                const elapsedTime = performance.now() - startTime;
+                const remainingTime = Math.max(MIN_DISPLAY_TIME - elapsedTime, 0);
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.classList.add('loaded');
+                }, remainingTime);
+            };
+
+            hidePreloader();
+  
+        });
+
+    </script>
+    <script src="https://sibforms.com/forms/end-form/build/main.js"></script>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
