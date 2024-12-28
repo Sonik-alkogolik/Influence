@@ -112,7 +112,6 @@ async function handleFooterFormSubmit(event) {
     const email = document.getElementById('footer-email').value;
 
     const apiUrl = 'https://api.brevo.com/v3/contacts';
-    // const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
@@ -140,7 +139,6 @@ async function handlePopupFormSubmit(event) {
     const email = document.getElementById('popup-email').value;
 
     const apiUrl = 'https://api.brevo.com/v3/contacts';
-    // const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
