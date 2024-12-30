@@ -106,13 +106,14 @@ function showMessage(elementId, message, type) {
     }
 }
 
+const apiKey = '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';
+const responseMessage = document.getElementById('email-subscription-status');
 // Обработчик для формы в футере
 async function handleFooterFormSubmit(event) {
     event.preventDefault();
     const email = document.getElementById('footer-email').value;
-
     const apiUrl = 'https://api.brevo.com/v3/contacts';
-    const apiKey = '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';
+   
     const data = { email, listIds: [2] };
 
     try {
@@ -125,6 +126,12 @@ async function handleFooterFormSubmit(event) {
         if (response.ok) {
             showMessage('footer-response-message', 'You have successfully subscribed', 'success');
             document.getElementById('footer-email').value = ''; // Очистить поле
+            overlay.style.display = 'block';
+            responseMessage.classList.add('status-message');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                responseMessage.classList.remove('status-message');
+            }, 1000);
         } else {
             const errorData = await response.json();
             showMessage('footer-response-message', `Error: ${errorData.message}`, 'error');
@@ -138,9 +145,7 @@ async function handleFooterFormSubmit(event) {
 async function handlePopupFormSubmit(event) {
     event.preventDefault();
     const email = document.getElementById('popup-email').value;
-
     const apiUrl = 'https://api.brevo.com/v3/contacts';
-    const apiKey = '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';
     const data = { email, listIds: [2] };
 
     try {
@@ -152,9 +157,13 @@ async function handlePopupFormSubmit(event) {
 
         if (response.ok) {
             showMessage('popup-response-message', 'You have successfully subscribed', 'success');
-            document.getElementById('popup-email').value = ''; // Очистить поле
+            document.getElementById('popup-email').value = ''; 
             formContainer.style.display = 'none';
-            overlay.style.display = 'none';
+            responseMessage.classList.add('status-message');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                responseMessage.classList.remove('status-message');
+            }, 1000);
         } else {
             const errorData = await response.json();
             showMessage('popup-response-message', `Error: ${errorData.message}`, 'error');
@@ -296,6 +305,7 @@ window.addEventListener('DOMContentLoaded', () => {
             '.form-container',
             '.form-container h2',
             '.signup-form input[type=email]',
+            '.subscription-status-message',
         ];
 
         // Применение класса `black` ко всем элементам
@@ -306,7 +316,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // // Смена логотипа
         const footerLogo = document.querySelector('.footer-logo img');
         if (footerLogo) {
-            footerLogo.src = 'img/logo-footer-dark.png';
+            footerLogo.src = 'img/logo-footer-dark.svg';
         }
         //  // Смена логотипа
         //  const HeaderLogo = document.querySelector('header img');
@@ -377,6 +387,7 @@ window.addEventListener('DOMContentLoaded', () => {
             '.form-container',
             '.form-container h2',
             '.signup-form input[type=email]',
+            '.subscription-status-message',
         ];
 
         // Удаление класса `black` со всех элементов
@@ -387,7 +398,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // // Смена логотипа
         const footerLogo = document.querySelector('.footer-logo img');
         if (footerLogo) {
-            footerLogo.src = 'img/logo-footer.png';
+            footerLogo.src = 'img/logo-footer.svg';
         }
         //  // Смена логотипа
         //  const HeaderLogo = document.querySelector('header img');

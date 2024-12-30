@@ -1640,6 +1640,31 @@ header button.get-access-btn.black {
   color: #FFFFFF;
 }
 
+.subscription-status-message {
+  padding: 180px;
+  border-radius: 40px;
+  position: fixed;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: none;
+  background: #FFF;
+  background: linear-gradient(274.56deg, #F08776 -29.93%, #F7CBA2 100%);
+  color: #FFF;
+  font-size: 48px;
+  z-index: 99;
+}
+.subscription-status-message.black {
+  background: #0D0D0D;
+}
+.subscription-status-message.status-message {
+  display: flex;
+ 
+}
 
 @media (max-width: 490px) {
   .scroll-to-top {
